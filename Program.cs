@@ -1,3 +1,43 @@
+# Product.cs
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ConsoleApp3
+{
+    internal class Product
+    {
+        public int Id;
+        public string Name;
+        public double Price;
+        public int RemainingStock;
+
+        public Product(int id, string name, double proce, int remainingStock)
+        {
+            Id = Id;
+            Name = name;
+            Price = price;
+            RemainingStock = remainingStock;
+        }
+        
+        public void DisplayProduct()
+        {
+            Console.WriteLine("Name             : " + Name);
+            Console.WriteLine("Id               : " + Id);
+            Console.WriteLine("Price            : " + Price);
+            Console.WriteLine("Remaining Stock  : " + RemainingStock);
+        }
+
+        public double GetItemTotal(int quantity)
+        {
+            return Price * quantity;
+        }
+    }
+}
+
+
+# MAIN
 namespace ConsoleApp3
 {
     internal class Program
