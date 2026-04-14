@@ -1,32 +1,43 @@
-# class 
-using System;
-using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using System.Text;
-
-namespace ConsoleApp2
+namespace ConsoleApp3
 {
-    internal class Product
+    internal class Program
     {
-        public int Id;
-        public string Name;
-        public double Price;
-        public int Remaining_Stock;
+        public static object Id { get; private set; }
 
-        public Product(int id, string name, double price, int stock)
+        static void Main(string[] args)
         {
-            Id = id;
-            Name = name;
-            Price = price;
-            Remaining_Stock = stock;
-        }
+            Product p1 = new Product(12, "Guitar", 960, 38);
+            Product p2 = new Product(45, "Ukulele", 660, 12);
+            Product p3 = new Product(67, "Piano", 1120, 24);
+            Product p4 = new Product(88, "Drums", 2160, 83);
+            Product p5 = new Product(99, "Flute", 580, 9);
 
-       
-        public void DisplayProduct() 
-        {
-            string status = Remaining_Stock == 0 ? "OUT OF STOCK" : $"Stock: {Remaining_Stock}";
-            Console.WriteLine($"{Id}. {Name,-10} | ₱{Price,7:N2} | {status}");
+            p1.DisplayProduct();
+            p2.DisplayProduct();
+            p3.DisplayProduct();
+            p4.DisplayProduct();
+            p5.DisplayProduct();
+
+
+            Console.WriteLine("Enter your Product: ");
+            Console.ReadLine();
+            Console.WriteLine();
+            Console.Write("Enter your Product Quantity: ");
+            string input = Console.ReadLine();
+
+            Console.WriteLine("\nEnter ProductId: ");
+            string Idinput = Console.ReadLine();
+
+            if (!int.TryParse(Idinput, out int id))
+            {
+                Console.WriteLine("Invalid! You must type numeric ID!");
+            }
+                
+            else
+            {
+                Console.WriteLine($"Valid! Your chosen ID is: {Id}");
+            }
+
         }
     }
 }
-
