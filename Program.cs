@@ -21,7 +21,7 @@ namespace ConsoleApp3
 
             Console.WriteLine("Enter your Product: ");
             Console.ReadLine();
-            Console.WriteLine();
+            
             Console.Write("Enter your Product Quantity: ");
             string input = Console.ReadLine();
 
@@ -32,10 +32,13 @@ namespace ConsoleApp3
             {
                 Console.WriteLine("Invalid! You must type numeric ID!");
             }
-                
+            else if (id != 12 && && id != 45 && id != 67 && id != 88 && id != 99)
+            {
+                Console.WriteLine("Product ID is not found!");
+            }
             else
             {
-                Console.WriteLine($"Valid! Your chosen ID is: {Id}");
+                Console.WriteLine("PROCEED");
             }
 
         }
