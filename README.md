@@ -31,4 +31,4 @@ These are the prompts/questions I asked:
 - Why is my ID loop not breaking or stopping?
 - Do you think my code is messy? Can you help me clean my code? 
 
-The AI helped me in several areas of the project, including debugging broken loops, defining shopping carat structure, and guide me how to code.
+The AI helped me in several areas of the project, including debugging broken loops, defining shopping carat structure, and guide me how to code. After using AI, I improved my program by fixing  logical errrors, inputing validation properly, creating stock, and I corrected the loop flow. These improvements made my program more organized and functional. Through the use of AI for debugging, I successfully developed a console application that  manages inventory, processes cart transactions, and handles errors professionally.
