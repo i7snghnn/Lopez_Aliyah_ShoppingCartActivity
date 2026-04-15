@@ -39,7 +39,7 @@ namespace ConsoleApp3
 
 # MAIN
 namespace ConsoleApp3
-{
+                                {
     internal class Program
     {
         public static object Id { get; private set; }
@@ -55,31 +55,49 @@ namespace ConsoleApp3
             Product [] products = new Product [] { p1, p2, p3, p4, p5 };
             
             int[] cartQty = cartPrice = new int[5];
+            double[] cartPrice = new double[5];
             
-
-
-            Console.WriteLine("Enter your Product: ");
-            Console.ReadLine();
-            
-            Console.Write("Enter your Product Quantity: ");
-            string input = Console.ReadLine();
-
-            Console.WriteLine("\nEnter ProductId: ");
-            string Idinput = Console.ReadLine();
-
-            if (!int.TryParse(Idinput, out int id))
+            bool isShopping = true;
+            while (isShopping)
             {
-                Console.WriteLine("Invalid! You must type numeric ID!");
-                continue;
-            }
-            if (id != 12 && && id != 45 && id != 67 && id != 88 && id != 99)
-            {
-                Console.WriteLine("Product ID is not found!");
-                continue;
+                Console.WriteLine("Available Products: ");
+                foreach (Product product in products)
+                {
+                    product.DisplayProduct();
+                }
+                Console.WriteLine("\nEnter ProductId: ");
+                string Idinput = Console.ReadLine();
+
+                if (!int.TryParse(Idinput, out int id))
+                {
+                    Console.WriteLine("Invalid! You must type numeric ID!");
+                    continue;
+                }
+                if (id != 12 && && id != 45 && id != 67 && id != 88 && id != 99)
+                {
+                    Console.WriteLine("Product ID is not found!");
+                    continue;
+                }
+                Console.WriteLine("Enter Product Quantity: ");
+                string qtyinput = Console.ReadLine();
+                if (!(int.TryParse(qtyinput, result: out int qty) && qty > 0))
+                {
+                    Console.WriteLine("Invalid Quantity!");
+                }
+                if (qty <= 0)
+                {
+                    Console.WriteLine("Invalid quantity. Please enter a positive number.");
+                    continue;
+                }
+                if (qty > ((Product)selectedProduct).RemainingStock)
+                {
+                    Console.WriteLine("Not enough stock available.");
+                    continue;
+                }
+
                 
             }
-            
-
+         
         }
     }
 }
