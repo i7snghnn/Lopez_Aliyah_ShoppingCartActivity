@@ -71,7 +71,7 @@ internal class Program
             while (isShopping)
             {
                 Console.Clear();
-                Console.WriteLine("Available Products: ");
+                Console.WriteLine("========== Available Products: ==========");
                 Console.WriteLine();
                 foreach (Product product in products)
                 {
