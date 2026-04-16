@@ -13,22 +13,4 @@ It features:
 • Updated stock after checkout
 
 
-AI Usage In This Project
 
-I used different types of AI such as Gemini AI, chatGPT, and claude AI as a collaborative coding partner. 
-These AI's helped me in building and fixing this project, they also assisted me by explaining some part i do not understand. Further, AI was used to ensure that my program can handled user errors effectively. 
-
-Why AI was used?
-I used AI to address bugs that were difficult for me to solve. Like for example, the program did not exit a loop after i entered too much item in a cart. I also used AI to understand the purpose of other functions and how to use it properly.
-
-These are the prompts/questions I asked:
-- How do i use int.TryParse() to validate quantity in C# and what is the purpose of it?
-- What is the problem in my code? *share my code*
-- How do I display remaining stock after the loop ended?
-- Okayy .. so i have a code and I don't know why the outcome keeps on looping after I put 5 items in cart. Isn't that supposed to break?
-- What is the purpose of a cart in a store program and how does it work?
-- Can you guide me on how to code it? Don't give me the code directly.. like give me an example so I don't have to rely on you too much.
-- Why is my ID loop not breaking or stopping?
-- Do you think my code is messy? Can you help me clean my code? 
-
-The AI helped me in several areas of the project, including debugging broken loops, defining shopping carat structure, and guide me how to code. After using AI, I improved my program by fixing  logical errrors, inputing validation properly, creating stock, and I corrected the loop flow. These improvements made my program more organized and functional. Through the use of AI for debugging, I successfully developed a console application that  manages inventory, processes cart transactions, and handles errors professionally.
