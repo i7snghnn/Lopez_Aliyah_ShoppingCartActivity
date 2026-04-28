@@ -167,12 +167,13 @@ internal class Program
                     }
                     else
                     {
-                    cartItems[cartCount] = selectedProduct.Name;
-                    cartQty[cartCount] = qty;
-                    cartPrice[cartCount] = selectedProduct.Price * qty;
-                    cartCount++;
-                    Console.WriteLine($"Added {qty} {selectedProduct.Name}(s) to cart!");
-                    selectedProduct.RemainingStock -= qty;
+                    cart[cartCount] = new CartItem(
+                        selectedProduct.Name 
+                        qty,
+                        selectedProduct.GetItemTotal(qty)
+                        );
+                        cartCount ++;
+                        Console.WriteLine($"Added {qty} {selectedProduct.Name}(s) to cart!");
                     }
             }
 
