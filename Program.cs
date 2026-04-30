@@ -67,17 +67,51 @@ internal class CartItem
     }
 }
 
+#Order.cs
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace part_2
+{
+    internal class Order
+    {
+        public int ReceiptNumber;
+        public string DateTime;
+        public double finalTotal;
+
+        public Order(int receiptNumber, string dateTime, double finalTotal)
+        {
+            ReceiptNumber = receiptNumber;
+            DateTime = dateTime;
+            finalTotal = finalTotal;
+        }   
+    }
+}
+
 
 # MAIN
 using ConsoleApp3;
+using System.Security.Cryptography;
 
-Product selectedProduct = null;
+internal class Program
+{
+    static int receiptCounter = 1;
+    static Order[] orderHistory = new Order[100];
+    static int orderCount = 0;
+    private static int i;
 
-Product p1 = new Product(12, "String Instruments", "Guitar", 960, 38);
-Product p2 = new Product(45, "String Instruments", "Ukulele", 660, 12);
-Product p3 = new Product(67, "Keyboard Instruments", "Piano", 1120, 24);
-Product p4 = new Product(88, "Percussion Instruments", "Drums", 2160, 83);
-Product p5 = new Product(99, "Wind Instruments", "Flute", 580, 9);
+    private static void Main(string[] args)
+    {
+
+        Product selectedProduct = null;
+
+        Product p1 = new Product(12, "String Instruments", "Guitar", 960, 38);
+        Product p2 = new Product(45, "String Instruments", "Ukulele", 660, 12);
+        Product p3 = new Product(67, "Keyboard Instruments", "Piano", 1120, 24);
+        Product p4 = new Product(88, "Percussion Instruments", "Drums", 2160, 83);
+        Product p5 = new Product(99, "Wind Instruments", "Flute", 580, 9);
 
 
         Product[] products = new Product[] { p1, p2, p3, p4, p5 };
@@ -85,8 +119,8 @@ Product p5 = new Product(99, "Wind Instruments", "Flute", 580, 9);
         int cartCount = 0;
 
         bool isShopping = true;
-while (isShopping)
-{
+        while (isShopping)
+        {
     Console.Clear();
     Console.WriteLine("========== MAIN MENU ==========");
     Console.WriteLine("[1] Browse Products");
