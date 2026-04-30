@@ -104,22 +104,26 @@ while (isShopping)
             foreach (Product product in products)
                 product.DisplayProduct();
             Console.ReadKey(); continue;
+        case "2":
+            Console.WriteLine("\nEnter product name to search: ");
+            string nameInput = Console.ReadLine();
 
-            
-                Console.WriteLine("Product ID is not found!");
-                Console.ReadKey(); continue;
-            }
-            if (selectedProduct.RemainingStock == 0)
+            bool found = false;
+            foreach (Product product in products)
             {
-                Console.WriteLine($"{selectedProduct.Name} is out of stock!");
-                Console.ReadKey(); continue;
+                if (product.Name.Contains(nameInput, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    product.DisplayProduct();
+                    found = true;
+                }
             }
 
-            Console.WriteLine("Product Selected: " + selectedProduct.Name);
-            Console.WriteLine("\nEnter Product Quantity: ");
-            string qtyInput = Console.ReadLine();
-            if (!int.TryParse(qtyInput, out int qty))
+            if (!found)
             {
+                Console.WriteLine("Product not found!");
+            }
+            Console.ReadKey();
+    break;
                 Console.WriteLine("Invalid! You must type numeric Quantity!");
                 Console.ReadKey(); continue;
             }
