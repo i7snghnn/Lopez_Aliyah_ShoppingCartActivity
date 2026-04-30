@@ -143,6 +143,72 @@ while (isShopping)
                 Console.ReadKey(); continue;
             }
             Console.ReadKey(); continue;
+        case "4":
+            bool inCartMenu = true;
+            while (inCartMenu)
+            {
+                Console.Clear();
+                Console.WriteLine("========== Cart Menu ==========\n");
+
+                Console.WriteLine("[1] View Cart");
+                Console.WriteLine("[2] Remove Item from Cart");
+                Console.WriteLine("[3] Update item quantity");
+                Console.WriteLine("[4] Clear Cart");
+                Console.WriteLine("[5] Checkout");
+                Console.WriteLine("[6] Back to Shopping");
+                 string cartChoice = Console.ReadLine();
+
+                switch (cartChoice)
+                {
+                    case "1":
+                        Console.WriteLine("Viewing Cart: ");
+                        if (cartCount == 0)
+                        {
+                            Console.WriteLine("Your cart is empty!");
+                        }
+                        else
+                        {
+                                for (int i = 0; i < cartCount; i++)
+                                {
+                                    cart[i].DisplayCartItem();
+                                }
+                        }
+                        Console.ReadKey();
+                        break;
+                case "2":
+                    if (cartCount == 0)
+                    {
+                        Console.WriteLine("Your cart is empty!");
+                        Console.ReadKey();
+                        break;
+                    }
+                     for (int i = 0; i < cartCount; i++)
+                    {
+                        Console.WriteLine($"[ {i + 1} ] {cart[i].Name}");
+                    }
+                    Console.WriteLine("Enter the number of the item to remove: ");
+                    if (!int.TryParse(Console.ReadLine(), out int index) || index < 1 || index > cartCount)
+                    {
+                        Console.WriteLine("Invalid!");
+                        Console.ReadKey();
+                        break;
+                    }
+                    for (int i = index - 1; i < cartCount - 1; i++)
+                    {
+                        cart[i] = cart[i + 1];
+                    }
+                    cart[cartCount - 1] = null;
+                    cartCount--;
+
+                    foreach (Product product in products)
+                    {
+                        if (product.Name == cart[index - 1].Name)
+                            product.RemainingStock += cart[index - 1].Quantity;
+                    }
+                    Console.WriteLine("Item removed!");
+                    Console.ReadKey();
+                    break;
+
 
         
 
