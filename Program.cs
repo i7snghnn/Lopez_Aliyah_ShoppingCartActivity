@@ -250,35 +250,14 @@ while (isShopping)
                             break;
                         }
                     }
+                    cart[i] = null;
                 }
-                cart[i] = null;
             }
             cartCount = 0;
             Console.WriteLine("Cart cleared!");
             Console.ReadKey();
             break;
         case "5":
-                   
-            Console.WriteLine("Clearing Cart...");
-            if (cartCount > 0)
-            {
-                for (int i = 0; i < cartCount; i++)
-                {
-                    foreach (Product product in products)
-                    {
-                        if (product.Name == cart[i].Name)
-                        {
-                            product.RemainingStock += cart[i].Quantity;
-                            break;
-                        }
-                    }
-                }
-                cart[i] = null;
-            }
-            cartCount = 0;
-            Console.WriteLine("Cart cleared!");
-            Console.ReadKey();
-            break;
             Console.Clear();
             if (cartCount == 0)
             {
@@ -299,71 +278,73 @@ while (isShopping)
             {
                 Console.Clear();
                 Console.WriteLine("========== Checkout ==========\n");
-                Console.WriteLine($"Subtotal          : Php {checkoutTotal:F2}");
-                Console.WriteLine($"Discount          : Php {checkoutDiscount:F2}");
-                Console.WriteLine($"Total             : Php {finalTotal:F2}");
-                Console.WriteLine($"Enter payment amount: Php");
+                Console.WriteLine($"Subtotal          : PHP {checkoutTotal:F2}");
+                Console.WriteLine($"Discount          : PHP {checkoutDiscount:F2}");
+                Console.WriteLine($"Final Total       : PHP {finalTotal:F2}");
+                Console.Write("Enter payment: PHP ");
 
-                if(double.TryParse(Console.ReadLine(), out payment))
-                {
-                    if (payment >= finalTotal)
-                    {
-                        double change = payment - finalTotal;
-                        Console.WriteLine($"Payment accepted! Your change is Php {change:F2}");
-                        cart[i] = null;
-                        cartCount = 0;
-                        Console.ReadKey();
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Insufficient payment! Please enter an amount equal to or greater than the total.");
-                        Console.ReadKey();
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input! Please enter a valid payment amount.");
-                    Console.ReadKey();
-                }
-                break;
-            }
-
-            double changeAmount = payment - finalTotal;
-            string receiptNumber = receiptCounter.ToString();
-            string dateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            Console.Clear();
-            Console.WriteLine("========== Receipt ==========\n");
-            Console.WriteLine("Receipt Number: " + receiptNumber);
-            Console.WriteLine("Date & Time   : " + dateTime);
-            Console.WriteLine("=============================\n");
-
-            for (int i = 0; i < cartCount; i++)
+            if (!double.TryParse(Console.ReadLine(), out payment) || payment <= 0)
             {
-                Console.WriteLine($"{cart[i].Name} x{cart[i].Quantity} - Php {cart[i].TotalPrice:F2}");
+                Console.WriteLine("Invalid payment!");
+                Console.ReadKey();
+                continue;
             }
+            if (payment < finalTotal)
+            {
+                Console.WriteLine("Insufficient payment! Try again.");
+                Console.ReadKey();
+                continue;
+            }
+            break;
+        }
 
-            Console.WriteLine("\n=============================");
-            Console.WriteLine($"Total Payment  : Php {payment:F2}");
-            Console.WriteLine($"Total Discount : Php {checkoutDiscount:F2}");
-            Console.WriteLine($"Grand Total    : Php {finalTotal:F2}");
-            Console.WriteLine($"Change         : Php {changeAmount:F2}");
-            Console.WriteLine("=============================\n");
-            Console.WriteLine("Thank you for your purchase!");
-            Console.ReadKey();
+        double changeAmount = payment - finalTotal;
+        string receiptNumber = receiptCounter.ToString("D4");
+        string dateTime = DateTime.Now.ToString("MMMM dd, yyyy h:mm tt");
+
+        Console.Clear();
+        Console.WriteLine("========================================");
+        Console.WriteLine($"        RECEIPT NO: {receiptNumber}");
+        Console.WriteLine($"        Date: {dateTime}");
+        Console.WriteLine("========================================");
+        for (int i = 0; i < cartCount; i++)
+            Console.WriteLine($"{cart[i].Name,-15} x{cart[i].Quantity}   PHP {cart[i].TotalPrice:F2}");
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine($"{"Subtotal:",-25} PHP {checkoutTotal:F2}");
+            if (checkoutDiscount > 0)
+                Console.WriteLine($"{"Discount (10%):",-25} PHP {checkoutDiscount:F2}");
+            Console.WriteLine($"{"Final Total:",-25} PHP {finalTotal:F2}");
+            Console.WriteLine($"{"Payment:",-25} PHP {payment:F2}");
+            Console.WriteLine($"{"Change:",-25} PHP {changeAmount:F2}");
+            Console.WriteLine("========================================");
+            Console.WriteLine("      Thank you for shopping!");
+            Console.WriteLine("========================================");
+
+            orderHistory[orderCount] = new Order(receiptNumber, dateTime, finalTotal);
+            orderCount++;
+            receiptCounter++;
+
+            Console.WriteLine("\n--- LOW STOCK ALERT ---");
+            bool hasLow = false;
+            foreach (Product product in products)
+            {
+                if (product.RemainingStock <= 5)
+                {
+                Console.WriteLine($"{product.Name} has only {product.RemainingStock} left!");
+                hasLow = true;
+                }
+            }
+            if (!hasLow) Console.WriteLine("All products have sufficient stock.");
 
             Array.Clear(cart, 0, cart.Length);
             cartCount = 0;
-            receiptCounter++; 
 
-          
             Console.ReadKey();
             inCartMenu = false;
             break;
         default:
-            Console.WriteLine("Invalid choice!");
-            Console.ReadKey();
+        Console.WriteLine("Invalid choice!");
+        Console.ReadKey();
             break;
     }
 }
