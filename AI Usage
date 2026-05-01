@@ -1,9 +1,9 @@
-AI Usage In This Project
+AI Usage In This Project #PT.2
 
-I used different types of AI such as Gemini AI, chatGPT, and claude AI as a collaborative coding partner. These AI's helped me in building and fixing this project, they also assisted me by explaining some part i do not understand. Further, AI was used to ensure that my program can handled user errors effectively. 
+I used claude AI as a collaborative coding partner. Theis AI helped me in building and fixing this project, they also assisted me by explaining some part i do not understand. Further, AI was used to ensure that my program can handled user errors effectively. 
 
 Why AI was used?
-I used AI to address bugs that were difficult for me to solve. Like for example, the program did not exit a loop after i entered too much item in a cart. I also used AI to understand the purpose of other functions and how to use it properly.
+I used AI because some concepts is so hard for me to understand, such as switch-casea nd array manipulation. It helped me learn faster by explaining things in a simle way that was easier to understand.
 
 These are the prompts/questions I asked:
 - How do i use int.TryParse() to validate quantity in C# and what is the purpose of it?
