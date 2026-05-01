@@ -113,7 +113,7 @@ internal class Program
         Product p5 = new Product(99, "Wind Instruments", "Flute", 580, 9);
 
         Product[] products = new Product[] { p1, p2, p3, p4, p5 };
-        CartItem[] cart = new CartItem[3];
+        CartItem[] cart = new CartItem[10];
         int cartCount = 0;
 
 
