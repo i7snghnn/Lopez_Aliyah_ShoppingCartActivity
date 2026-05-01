@@ -1,14 +1,13 @@
 Description
 
-This is an enhanced version of Shopping Cart System where users manage their cart before checkout, validate payment, generate a receipt with receipt number and date/time, show low-stock alerts, and keep an order history during the program run. 
+This is a console-based Shopping Cart System in C# using classes, objects, and an array of objects. That allows users to select products and manage a shopping cart.
 
 It features:
-- View Cart
-- Remove Item from Cart
-- Update Item Quantity
-- Clear Cart
-- Checkout
-- Product Search
-- Product Categories
-- Payment Validation
-- Receipt Number and date
+• Store Menu
+• Validation messages
+• Added to cart confirmation
+• Receipt
+• Grand Total
+• Discount amount 
+• Final Total
+• Updated stock after checkout
