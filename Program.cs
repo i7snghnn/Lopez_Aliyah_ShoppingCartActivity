@@ -455,6 +455,9 @@ internal class Program
                                 Console.ReadKey();
                                 inCartMenu = false;
                                 break;
+                            case "6":
+                                inCartMenu = false;
+                                break;
                             default:
                                 Console.WriteLine("Invalid choice!");
                                 Console.ReadKey();
@@ -476,6 +479,13 @@ internal class Program
                             Console.WriteLine($"Receipt #{orderHistory[i].ReceiptNumber} | {orderHistory[i].DateTime} | PHP {GetFinalTotal(i):F2}");
                         }
                     }
+                    Console.ReadKey();
+                    break;
+                 case "6":
+                    isShopping = false;
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice!");
                     Console.ReadKey();
                     break;
             }
