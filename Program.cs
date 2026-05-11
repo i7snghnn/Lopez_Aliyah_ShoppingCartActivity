@@ -8,11 +8,11 @@ namespace ConsoleApp3
 {
     internal class Product
         {
-        public int Id;
-        public string Name;
-        public double Price;
-        public int RemainingStock;
-        public string Category;
+        private int _id;
+        private string name;
+        private double price;
+        private int remainingStock;
+        private string category;
 
          public Product(int id, string category, string name, double price, int remainingStock)
         {
