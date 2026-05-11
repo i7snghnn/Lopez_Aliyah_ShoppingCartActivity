@@ -14,6 +14,12 @@ namespace ConsoleApp3
         private int remainingStock;
         private string category;
 
+        public int Id
+        {
+            get { return _id; }
+            private set { _id = value; }
+        }
+
          public Product(int id, string category, string name, double price, int remainingStock)
         {
             Id = id;
