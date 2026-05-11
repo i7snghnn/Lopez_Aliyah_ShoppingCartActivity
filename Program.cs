@@ -1,4 +1,4 @@
-# Product.cs
+// Product.cs
 
 using System;
 using System.Collections.Generic;
@@ -20,44 +20,33 @@ namespace ConsoleApp3
             private set { _id = value; }
         }
 
-         public Product(int id, string category, string name, double price, int remainingStock)
+        public int Quantity
         {
-            Id = id;
+            get { return _quantity; }
+            set { _quantity = value; }   
+
+        public double TotalPrice
+        {
+            get { return _totalPrice; }
+            set { _totalPrice = value; } 
+        }
+
+         public CartItem(string name, int quantity, double totalPrice)
+        {
             Name = name;
-            Price = price;
-            RemainingStock = remainingStock;
-            Category = category;
+            Quantity = quantity;
+            TotalPrice = totalPrice;
         }
 
-        public void DisplayProduct()
+        public void DisplayCartItem()
         {
-            Console.WriteLine("Name             : " + Name);
-            Console.WriteLine("Category         : " + Category);
-            Console.WriteLine("Id               : " + Id);
-            Console.WriteLine("Price            : " + Price);
-            Console.WriteLine("Remaining Stock  : " + RemainingStock);
-        }
-
-        public double GetItemTotal(int quantity)
-        {
-            return Price * quantity;
-        }
-
-        public bool HasEnoughStock(int quantity)
-        {
-            return RemainingStock >= quantity;
-
-        }
-
-        public void DeductStock(int quantity)
-        {
-            RemainingStock -= quantity;
+            Console.WriteLine($"{Name,-15} x{Quantity}   PHP {TotalPrice:F2}");
         }
 
     }
 }
 
-# CartItem.cs
+// CartItem.cs
 
 internal class CartItem
 {
@@ -73,7 +62,7 @@ internal class CartItem
     }
 }
 
-#Order.cs
+// Order.cs
 
 using System;
 using System.Collections.Generic;
