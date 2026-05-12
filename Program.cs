@@ -7,53 +7,53 @@ using System.Text;
 namespace ConsoleApp3
 {
     internal class Product
+    {
+        private int Id;
+        private string Name;
+        private double Price;
+        private int RemainingStock;
+        private string Category;
+
+        public int id { get { return Id; } set { Id = value; } }
+        public string name { get { return Name; } set { Name = value; } }
+        public double price { get { return Price; } set { Price = value; } }
+        public int remainingStock { get { return RemainingStock; } set { RemainingStock = value; } }
+        public string category { get { return Category; } set { Category = value; } }
+
+        public Product(int id, string category, string name, double price, int remainingStock)
         {
-            private int Id;
-            private string Name;
-            private double Price;
-            private int RemainingStock;
-            private string Category;
-
-            public int id { get { return Id; } set { Id = value; } }
-            public string name { get { return Name; } set { Name = value; } }
-            public double price { get { return Price; } set { Price = value; } }
-            public int remainingStock { get { return RemainingStock; } set { RemainingStock = value; } }
-            public string category { get { return Category; } set { Category = value; } }
-
-            public Product(int id, string category, string name, double price, int remainingStock)
-            {
-                this.Id = id;
-                this.Name = name;
-                this.Price = price;
-                this.RemainingStock = remainingStock;
-                this.Category = category;
-            }
-
-            public void DisplayProduct()
-            {
-                Console.WriteLine("Name             : " + Name);
-                Console.WriteLine("Category         : " + Category);
-                Console.WriteLine("Id               : " + Id);
-                Console.WriteLine("Price            : " + Price);
-                Console.WriteLine("Remaining Stock  : " + RemainingStock);
-            }
-
-            public double GetItemTotal(int quantity)
-            {
-                return Price * quantity;
-            }
-
-            public bool HasEnoughStock(int quantity)
-            {
-                return RemainingStock >= quantity;
-
-            }
-
-            public void DeductStock(int quantity)
-            {
-                RemainingStock -= quantity;
-            }
+            this.Id = id;
+            this.Name = name;
+            this.Price = price;
+            this.RemainingStock = remainingStock;
+            this.Category = category;
         }
+
+        public void DisplayProduct()
+        {
+            Console.WriteLine("Name             : " + Name);
+            Console.WriteLine("Category         : " + Category);
+            Console.WriteLine("Id               : " + Id);
+            Console.WriteLine("Price            : " + Price);
+            Console.WriteLine("Remaining Stock  : " + RemainingStock);
+        }
+
+        public double GetItemTotal(int quantity)
+        {
+             return Price * quantity;
+        }
+ 
+        public bool HasEnoughStock(int quantity)
+        {
+            return RemainingStock >= quantity;
+
+        }
+
+        public void DeductStock(int quantity)
+        {
+            RemainingStock -= quantity;
+        }
+    }
 }
 
 
@@ -61,15 +61,24 @@ namespace ConsoleApp3
 
 internal class CartItem
 {
-    public string Name;
-    public int Quantity;
-    public double TotalPrice;
+    private string name;
+    private int quantity;
+    private double totalPrice;
+
+    public string Name { get { return name; } set { name = value; } }
+    public int Quantity { get { return quantity; } set { quantity = value; } }
+    public double TotalPrice { get { return totalPrice; } set { totalPrice = value; } }
 
     public CartItem(string name, int quantity, double totalPrice)
     {
-        Name = name;
-        Quantity = quantity;
-        TotalPrice = totalPrice;
+        this.name = name;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    }
+
+    public void DisplayCartItem()
+    {
+        Console.WriteLine($"Name: {name} | Qty: {quantity} | Total: PHP {totalPrice :0.00}");
     }
 }
 
@@ -83,18 +92,22 @@ namespace part_2
 {
     internal class Order
     {
-        public int ReceiptNumber;
-        public string DateTime;
-        public double finalTotal;
+        private int receiptNumber;
+        private string dateTime;
+        private double finalTotal;
 
+        public int ReceiptNumber { get { return receiptNumber; } set { receiptNumber = value; } }
+        public string DateTime { get { return dateTime; } set { dateTime = value; } }
+        public double FinalTotal { get { return finalTotal; } set { finalTotal = value; } }
         public Order(int receiptNumber, string dateTime, double finalTotal)
         {
-            ReceiptNumber = receiptNumber;
-            DateTime = dateTime;
-            finalTotal = finalTotal;
+            this.receiptNumber = receiptNumber;
+            this.dateTime = dateTime;
+            this.finalTotal = finalTotal;
         }   
     }
 }
+
 
 
 # MAIN
