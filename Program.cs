@@ -110,13 +110,13 @@ namespace part_2
 
 
 
-# MAIN
+// Program.cs
 using ConsoleApp3;
 using System.Security.Cryptography;
 
 internal class Program
 {
-        static int receiptCounter = 1;
+    static int receiptCounter = 1;
     static Order[] orderHistory = new Order[100];
     static int orderCount = 0;
     private static int i;
