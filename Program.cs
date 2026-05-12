@@ -116,7 +116,7 @@ using System.Security.Cryptography;
 
 internal class Program
 {
-    static int receiptCounter = 1;
+        static int receiptCounter = 1;
     static Order[] orderHistory = new Order[100];
     static int orderCount = 0;
     private static int i;
@@ -171,7 +171,7 @@ internal class Program
                     selectedProduct = null;
                     foreach (Product product in products)
                     {
-                        if (product.Id == id) { selectedProduct = product; break; }
+                        if (product.id == id) { selectedProduct = product; break; }
                     }
 
                     if (selectedProduct == null)
@@ -179,13 +179,13 @@ internal class Program
                         Console.WriteLine("Product ID is not found!");
                         Console.ReadKey(); continue;
                     }
-                    if (selectedProduct.RemainingStock == 0)
+                    if (selectedProduct.remainingStock == 0)
                     {
-                        Console.WriteLine($"{selectedProduct.Name} is out of stock!");
+                        Console.WriteLine($"{selectedProduct.name} is out of stock!");
                         Console.ReadKey(); continue;
                     }
 
-                    Console.WriteLine("Product Selected: " + selectedProduct.Name);
+                    Console.WriteLine("Product Selected: " + selectedProduct.name);
                     Console.WriteLine("\nEnter Product Quantity: ");
                     string qtyInput = Console.ReadLine();
                     if (!int.TryParse(qtyInput, out int qty))
@@ -200,14 +200,14 @@ internal class Program
                     }
                     if (!selectedProduct.HasEnoughStock(qty))
                     {
-                        Console.WriteLine($"Sorry, only {selectedProduct.RemainingStock} {selectedProduct.Name}(s) left in stock.");
+                        Console.WriteLine($"Sorry, only {selectedProduct.remainingStock} {selectedProduct.name}(s) left in stock.");
                         Console.ReadKey(); continue;
                     }
 
                     int existingIndex = -1;
                     for (int i = 0; i < cartCount; i++)
                     {
-                        if (cart[i].Name == selectedProduct.Name)
+                        if (cart[i].Name == selectedProduct.name)
                         {
                             existingIndex = i;
                             break;
@@ -218,7 +218,7 @@ internal class Program
                     {
                         cart[existingIndex].Quantity += qty;
                         cart[existingIndex].TotalPrice += selectedProduct.GetItemTotal(qty);
-                        Console.WriteLine($"Updated {selectedProduct.Name} in cart!");
+                        Console.WriteLine($"Updated {selectedProduct.name} in cart!");
                     }
                     else
                     {
@@ -228,9 +228,9 @@ internal class Program
                             Console.ReadKey();
                             break;
                         }
-                        cart[cartCount] = new CartItem(selectedProduct.Name, qty, selectedProduct.GetItemTotal(qty));
+                        cart[cartCount] = new CartItem(selectedProduct.name, qty, selectedProduct.GetItemTotal(qty));
                         cartCount++;
-                        Console.WriteLine($"Added {qty} {selectedProduct.Name}(s) to cart!");
+                        Console.WriteLine($"Added {qty} {selectedProduct.name}(s) to cart!");
                     }
 
                     selectedProduct.DeductStock(qty);
@@ -244,7 +244,7 @@ internal class Program
                     bool found = false;
                     foreach (Product product in products)
                     {
-                        if (product.Name.Contains(nameInput, StringComparison.CurrentCultureIgnoreCase))
+                        if (product.name.Contains(nameInput, StringComparison.CurrentCultureIgnoreCase))
                         {
                             product.DisplayProduct();
                             found = true;
@@ -265,7 +265,7 @@ internal class Program
                     bool foundCategory = false;
                     foreach (Product product in products)
                     {
-                        if (product.Category.Equals(categoryInput, StringComparison.CurrentCultureIgnoreCase))
+                        if (product.category.Equals(categoryInput, StringComparison.CurrentCultureIgnoreCase))
                         {
                             product.DisplayProduct();
                             foundCategory = true;
@@ -324,7 +324,7 @@ internal class Program
 
                                     foreach (Product product in products)
                                     {
-                                        if (product.Name == removedItemName) product.RemainingStock += removedQty;
+                                        if (product.name == removedItemName) product.remainingStock += removedQty;
                                     }
                                  
                                     for (int i = index - 1; i < cartCount - 1; i++) cart[i] = cart[i + 1];
@@ -349,7 +349,7 @@ internal class Program
                                         int diff = newQuantity - cart[index - 1].Quantity;
                                         foreach (Product product in products)
                                         {
-                                            if (product.Name == cart[index - 1].Name)
+                                            if (product.name == cart[index - 1].Name)
                                             {
                                                 if (diff > 0 && !product.HasEnoughStock(diff)) Console.WriteLine("Not enough stock!");
                                                 else
@@ -376,9 +376,9 @@ internal class Program
                                     {
                                         foreach (Product product in products)
                                         {
-                                            if (product.Name == cart[i].Name)
+                                            if (product.name == cart[i].Name)
                                             {
-                                                product.RemainingStock += cart[i].Quantity;
+                                                product.remainingStock += cart[i].Quantity;
                                                 break;
                                             }
                                         }
@@ -460,9 +460,9 @@ internal class Program
                                 bool hasLow = false;
                                 foreach (Product product in products)
                                 {
-                                    if (product.RemainingStock <= 5)
+                                    if (product.remainingStock <= 5)
                                     {
-                                        Console.WriteLine($"{product.Name} has only {product.RemainingStock} left!");
+                                        Console.WriteLine($"{product.name} has only {product.remainingStock} left!");
                                         hasLow = true;
                                     }
                                 }
@@ -500,6 +500,7 @@ internal class Program
                     }
                     Console.ReadKey();
                     break;
+
                  case "6":
                     isShopping = false;
                     break;
