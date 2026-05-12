@@ -8,43 +8,54 @@ namespace ConsoleApp3
 {
     internal class Product
         {
-        private int _id;
-        private string name;
-        private double price;
-        private int remainingStock;
-        private string category;
+            private int Id;
+            private string Name;
+            private double Price;
+            private int RemainingStock;
+            private string Category;
 
-        public int Id
-        {
-            get { return _id; }
-            private set { _id = value; }
+            public int id { get { return Id; } set { Id = value; } }
+            public string name { get { return Name; } set { Name = value; } }
+            public double price { get { return Price; } set { Price = value; } }
+            public int remainingStock { get { return RemainingStock; } set { RemainingStock = value; } }
+            public string category { get { return Category; } set { Category = value; } }
+
+            public Product(int id, string category, string name, double price, int remainingStock)
+            {
+                this.Id = id;
+                this.Name = name;
+                this.Price = price;
+                this.RemainingStock = remainingStock;
+                this.Category = category;
+            }
+
+            public void DisplayProduct()
+            {
+                Console.WriteLine("Name             : " + Name);
+                Console.WriteLine("Category         : " + Category);
+                Console.WriteLine("Id               : " + Id);
+                Console.WriteLine("Price            : " + Price);
+                Console.WriteLine("Remaining Stock  : " + RemainingStock);
+            }
+
+            public double GetItemTotal(int quantity)
+            {
+                return Price * quantity;
+            }
+
+            public bool HasEnoughStock(int quantity)
+            {
+                return RemainingStock >= quantity;
+
+            }
+
+            public void DeductStock(int quantity)
+            {
+                RemainingStock -= quantity;
+            }
         }
-
-        public int Quantity
-        {
-            get { return _quantity; }
-            set { _quantity = value; }   
-
-        public double TotalPrice
-        {
-            get { return _totalPrice; }
-            set { _totalPrice = value; } 
-        }
-
-         public CartItem(string name, int quantity, double totalPrice)
-        {
-            Name = name;
-            Quantity = quantity;
-            TotalPrice = totalPrice;
-        }
-
-        public void DisplayCartItem()
-        {
-            Console.WriteLine($"{Name,-15} x{Quantity}   PHP {TotalPrice:F2}");
-        }
-
-    }
 }
+
 
 // CartItem.cs
 
