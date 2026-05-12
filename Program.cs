@@ -1,4 +1,4 @@
-# Product.cs
+// Product.cs
 
 using System;
 using System.Collections.Generic;
@@ -7,20 +7,26 @@ using System.Text;
 namespace ConsoleApp3
 {
     internal class Product
-        {
-        public int Id;
-        public string Name;
-        public double Price;
-        public int RemainingStock;
-        public string Category;
+    {
+        private int Id;
+        private string Name;
+        private double Price;
+        private int RemainingStock;
+        private string Category;
 
-         public Product(int id, string category, string name, double price, int remainingStock)
+        public int id { get { return Id; } set { Id = value; } }
+        public string name { get { return Name; } set { Name = value; } }
+        public double price { get { return Price; } set { Price = value; } }
+        public int remainingStock { get { return RemainingStock; } set { RemainingStock = value; } }
+        public string category { get { return Category; } set { Category = value; } }
+
+        public Product(int id, string category, string name, double price, int remainingStock)
         {
-            Id = id;
-            Name = name;
-            Price = price;
-            RemainingStock = remainingStock;
-            Category = category;
+            this.Id = id;
+            this.Name = name;
+            this.Price = price;
+            this.RemainingStock = remainingStock;
+            this.Category = category;
         }
 
         public void DisplayProduct()
@@ -34,9 +40,9 @@ namespace ConsoleApp3
 
         public double GetItemTotal(int quantity)
         {
-            return Price * quantity;
+             return Price * quantity;
         }
-
+ 
         public bool HasEnoughStock(int quantity)
         {
             return RemainingStock >= quantity;
@@ -47,27 +53,36 @@ namespace ConsoleApp3
         {
             RemainingStock -= quantity;
         }
-
     }
 }
 
-# CartItem.cs
+
+// CartItem.cs
 
 internal class CartItem
 {
-    public string Name;
-    public int Quantity;
-    public double TotalPrice;
+    private string name;
+    private int quantity;
+    private double totalPrice;
+
+    public string Name { get { return name; } set { name = value; } }
+    public int Quantity { get { return quantity; } set { quantity = value; } }
+    public double TotalPrice { get { return totalPrice; } set { totalPrice = value; } }
 
     public CartItem(string name, int quantity, double totalPrice)
     {
-        Name = name;
-        Quantity = quantity;
-        TotalPrice = totalPrice;
+        this.name = name;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    }
+
+    public void DisplayCartItem()
+    {
+        Console.WriteLine($"Name: {name} | Qty: {quantity} | Total: PHP {totalPrice :0.00}");
     }
 }
 
-#Order.cs
+// Order.cs
 
 using System;
 using System.Collections.Generic;
@@ -77,21 +92,25 @@ namespace part_2
 {
     internal class Order
     {
-        public int ReceiptNumber;
-        public string DateTime;
-        public double finalTotal;
+        private int receiptNumber;
+        private string dateTime;
+        private double finalTotal;
 
+        public int ReceiptNumber { get { return receiptNumber; } set { receiptNumber = value; } }
+        public string DateTime { get { return dateTime; } set { dateTime = value; } }
+        public double FinalTotal { get { return finalTotal; } set { finalTotal = value; } }
         public Order(int receiptNumber, string dateTime, double finalTotal)
         {
-            ReceiptNumber = receiptNumber;
-            DateTime = dateTime;
-            finalTotal = finalTotal;
+            this.receiptNumber = receiptNumber;
+            this.dateTime = dateTime;
+            this.finalTotal = finalTotal;
         }   
     }
 }
 
 
-# MAIN
+
+// Program.cs
 using ConsoleApp3;
 using System.Security.Cryptography;
 
@@ -152,7 +171,7 @@ internal class Program
                     selectedProduct = null;
                     foreach (Product product in products)
                     {
-                        if (product.Id == id) { selectedProduct = product; break; }
+                        if (product.id == id) { selectedProduct = product; break; }
                     }
 
                     if (selectedProduct == null)
@@ -160,13 +179,13 @@ internal class Program
                         Console.WriteLine("Product ID is not found!");
                         Console.ReadKey(); continue;
                     }
-                    if (selectedProduct.RemainingStock == 0)
+                    if (selectedProduct.remainingStock == 0)
                     {
-                        Console.WriteLine($"{selectedProduct.Name} is out of stock!");
+                        Console.WriteLine($"{selectedProduct.name} is out of stock!");
                         Console.ReadKey(); continue;
                     }
 
-                    Console.WriteLine("Product Selected: " + selectedProduct.Name);
+                    Console.WriteLine("Product Selected: " + selectedProduct.name);
                     Console.WriteLine("\nEnter Product Quantity: ");
                     string qtyInput = Console.ReadLine();
                     if (!int.TryParse(qtyInput, out int qty))
@@ -181,14 +200,14 @@ internal class Program
                     }
                     if (!selectedProduct.HasEnoughStock(qty))
                     {
-                        Console.WriteLine($"Sorry, only {selectedProduct.RemainingStock} {selectedProduct.Name}(s) left in stock.");
+                        Console.WriteLine($"Sorry, only {selectedProduct.remainingStock} {selectedProduct.name}(s) left in stock.");
                         Console.ReadKey(); continue;
                     }
 
                     int existingIndex = -1;
                     for (int i = 0; i < cartCount; i++)
                     {
-                        if (cart[i].Name == selectedProduct.Name)
+                        if (cart[i].Name == selectedProduct.name)
                         {
                             existingIndex = i;
                             break;
@@ -199,7 +218,7 @@ internal class Program
                     {
                         cart[existingIndex].Quantity += qty;
                         cart[existingIndex].TotalPrice += selectedProduct.GetItemTotal(qty);
-                        Console.WriteLine($"Updated {selectedProduct.Name} in cart!");
+                        Console.WriteLine($"Updated {selectedProduct.name} in cart!");
                     }
                     else
                     {
@@ -209,9 +228,9 @@ internal class Program
                             Console.ReadKey();
                             break;
                         }
-                        cart[cartCount] = new CartItem(selectedProduct.Name, qty, selectedProduct.GetItemTotal(qty));
+                        cart[cartCount] = new CartItem(selectedProduct.name, qty, selectedProduct.GetItemTotal(qty));
                         cartCount++;
-                        Console.WriteLine($"Added {qty} {selectedProduct.Name}(s) to cart!");
+                        Console.WriteLine($"Added {qty} {selectedProduct.name}(s) to cart!");
                     }
 
                     selectedProduct.DeductStock(qty);
@@ -225,7 +244,7 @@ internal class Program
                     bool found = false;
                     foreach (Product product in products)
                     {
-                        if (product.Name.Contains(nameInput, StringComparison.CurrentCultureIgnoreCase))
+                        if (product.name.Contains(nameInput, StringComparison.CurrentCultureIgnoreCase))
                         {
                             product.DisplayProduct();
                             found = true;
@@ -246,7 +265,7 @@ internal class Program
                     bool foundCategory = false;
                     foreach (Product product in products)
                     {
-                        if (product.Category.Equals(categoryInput, StringComparison.CurrentCultureIgnoreCase))
+                        if (product.category.Equals(categoryInput, StringComparison.CurrentCultureIgnoreCase))
                         {
                             product.DisplayProduct();
                             foundCategory = true;
@@ -305,7 +324,7 @@ internal class Program
 
                                     foreach (Product product in products)
                                     {
-                                        if (product.Name == removedItemName) product.RemainingStock += removedQty;
+                                        if (product.name == removedItemName) product.remainingStock += removedQty;
                                     }
                                  
                                     for (int i = index - 1; i < cartCount - 1; i++) cart[i] = cart[i + 1];
@@ -330,7 +349,7 @@ internal class Program
                                         int diff = newQuantity - cart[index - 1].Quantity;
                                         foreach (Product product in products)
                                         {
-                                            if (product.Name == cart[index - 1].Name)
+                                            if (product.name == cart[index - 1].Name)
                                             {
                                                 if (diff > 0 && !product.HasEnoughStock(diff)) Console.WriteLine("Not enough stock!");
                                                 else
@@ -357,9 +376,9 @@ internal class Program
                                     {
                                         foreach (Product product in products)
                                         {
-                                            if (product.Name == cart[i].Name)
+                                            if (product.name == cart[i].Name)
                                             {
-                                                product.RemainingStock += cart[i].Quantity;
+                                                product.remainingStock += cart[i].Quantity;
                                                 break;
                                             }
                                         }
@@ -441,9 +460,9 @@ internal class Program
                                 bool hasLow = false;
                                 foreach (Product product in products)
                                 {
-                                    if (product.RemainingStock <= 5)
+                                    if (product.remainingStock <= 5)
                                     {
-                                        Console.WriteLine($"{product.Name} has only {product.RemainingStock} left!");
+                                        Console.WriteLine($"{product.name} has only {product.remainingStock} left!");
                                         hasLow = true;
                                     }
                                 }
@@ -481,6 +500,7 @@ internal class Program
                     }
                     Console.ReadKey();
                     break;
+
                  case "6":
                     isShopping = false;
                     break;
